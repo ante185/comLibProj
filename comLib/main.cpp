@@ -2,17 +2,18 @@
 #include <stdlib.h>
 #include <iostream>
 
-bool state = 0; //Producer/Consumer
-unsigned int delay = 0; //ms
-unsigned int memSize = 0; //KB
-unsigned int numMsg = 0;
-unsigned int msgSize = 0; //0 for random
+bool state				= 0; //Producer/Consumer
+unsigned int delay		= 0; //ms
+unsigned int memSize	= 0; //KB
+unsigned int numMsg		= 0;
+unsigned int msgSize	= 0; //0 for random
 
 void inputParser(const int* argc, char** argv) {
 	unsigned short argChecked = 0;
 	switch (std::tolower(argv[1][0])) {
 		case 'c':
 			//Consumer
+			state = true;
 			break;
 		case 'p':
 			//Producer
@@ -21,6 +22,7 @@ void inputParser(const int* argc, char** argv) {
 	unsigned int* varPtr[4] = {&delay, &memSize, &numMsg, &msgSize };
 	for (int i = 0; i < 4; i++) {
 		*varPtr[i] = atoi(argv[i+2]);
+		std::cout << atoi(argv[i + 2]) << std::endl;
 	}
 }
 
