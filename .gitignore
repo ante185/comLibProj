@@ -31,3 +31,16 @@
 *.out
 *.app
 comLib/.vs/comLib/v15/Browse.VC.opendb
+*.db
+*.ipch
+*.db
+*.ilk
+*.log
+*.pdb
+*.tlog
+*.ini
+*.idb
+*.db
+*.db
+comLib/.vs/comLib/v15/.suo
+comLib/.vs/comLib/v15/Browse.VC.db
