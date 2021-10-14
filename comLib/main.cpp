@@ -9,7 +9,7 @@
 
 #define headerStep 16
 
-bool state				= 0; //Producer/Consumer
+bool state				= 1; //Producer/Consumer
 bool random				= 1;
 UINT64 delay			= 1; //ms
 UINT64 memSize			= 64; //KB
@@ -101,9 +101,6 @@ void write(message* data) {
 unsigned char* read() {
 	unsigned char* msgData;
 
-	if (RWHeadPos + sizeof(message::size) + sizeof(message::flag) >= memSize) {
-		RWHeadPos = 0;
-	}
 	//Wait for size to be written if it hasn't
 	while ((mData[RWHeadPos] | mData[RWHeadPos + 1]) == 0 || mData[RWHeadPos + sizeof(message::size)] == 15)
 	{
@@ -210,6 +207,9 @@ bool consumer() {
 
 	lastpos = RWHeadPos;
 
+	if (RWHeadPos + sizeof(message::size) + sizeof(message::flag) >= memSize) {
+		RWHeadPos = 0;
+	}
 	dataPtr = read();
 
 	if (lastpos + sizeof(message::size) < memSize && mData[lastpos + sizeof(message::size)] == (unsigned char)4) {
